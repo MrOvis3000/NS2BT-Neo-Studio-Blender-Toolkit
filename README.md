@@ -67,9 +67,11 @@ NS2BT has two halves. A **Studio plugin** exports from the running Studio (press
    and pick the `<time>_scene_<name>` folder, or **Import Character** and pick a character's
    folder.
 3. **Deck > Open Deck** puts the character controls in the viewport.
-4. Every import writes a report: *Character > Import report* (its *Whole report in the Text
-   Editor* button copies it out), and a scene import also writes the *NS2BT Scene Report* text
-   block. Anything it could not do is named there, most important first.
+4. Every import writes a report: *Character > Import report*, and the same as a file,
+   `<name>_import_report.log`, in the export folder beside `<name>_export.json` (a scene import:
+   `scene_import_report.log` in the scene's folder, and the *NS2BT Scene Report* text block).
+   Anything it could not do is named there, most important first.
+5. Materials show in **Material Preview** (`Z`) or a render; Solid view draws flat colours.
 
 The full manual is inside Blender: **NS2BT tab > Help > Open the manual**.
 
@@ -95,13 +97,23 @@ Close Studio and replace the DLL. In Blender, install the new zip over the old o
 
 ## Reporting a problem
 
-Please send:
+Open an issue on GitHub (*Issues > New issue > Bug report*) and **attach the import report**.
+Without it, most problems cannot be traced.
 
-- the import report (*Character > Import report > Whole report in the Text Editor*, or a
-  scene's *NS2BT Scene Report* text block);
-- the export folder's `<name>_export.json`, which lists what the exporter worked around;
-- for an export problem, `BepInEx\LogOutput.log`;
-- your Blender version, and what you did.
+1. **Find the export folder:** `<HS2>\Export\<timestamp>_<name>\`. In Blender,
+   *Character > Import report > Open its folder* opens it.
+2. **Attach the import report:** `<name>_import_report.log` in that folder. Every import writes it,
+   a failed one too; a scene import writes `scene_import_report.log` in the scene's folder. Drag
+   the file into the issue.
+3. **Attach the export's JSON from the same folder:** `<name>_export.json` (what the exporter
+   worked around), and for a material or texture problem `<name>_materials.json`.
+4. **For an export problem,** attach `<HS2>\BepInEx\LogOutput.log` too.
+5. **Say what you did, and your Blender version.** A screenshot helps. Missing textures? Check
+   that the viewport is in Material Preview (press `Z`): Solid view shows flat colours.
+
+NS2BT 1.0.0 does not write the report file yet: copy *Character > Import report > Whole report in
+the Text Editor* into the issue instead, or for a failed import the system console (*Window >
+Toggle System Console*).
 
 The report and the JSON are enough in most cases. Please don't send characters or textures you
 don't have the rights to share.

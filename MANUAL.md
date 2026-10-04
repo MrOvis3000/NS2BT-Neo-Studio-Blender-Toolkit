@@ -167,8 +167,20 @@ gives it a window of its own for a second monitor. It acts on the selected chara
 
 ## 5. The import report
 
-Every import writes what it did into **Character > Import report** (and the system
-console). The lines that mean something is wrong are at the top:
+Every import writes what it did into **Character > Import report**, and the same as a file:
+**`<name>_import_report.log` in the export folder**, beside `<name>_export.json`. A scene import
+writes `scene_import_report.log` in the scene's folder (and the *NS2BT Scene Report* text block),
+and each of its characters writes her own in her folder. The file is written even when an import
+fails, with the error at the bottom, and it is the one to attach to a bug report; your home
+folder's path is written `~` in it. The panel's *Open its folder* button shows it in Explorer.
+
+The lines that mean something is wrong are at the top:
+
+- *"... NS2BT has no recipe for yet, built plainly"* - materials on a shader NS2BT has not read
+  (on the body that includes HS2's own skin and eye shaders, for a card without Hanmen's
+  Next-Gen ones): textured, but without that shader's own effects. The line names the shaders.
+- *"left as a flat placeholder"* - a material nothing could build: it matched no record in the
+  export's `<name>_materials.json` and has no texture.
 
 - *"... is not exported"*, *"has no export folder"* - Studio could not export that subject. It is
   named, not silently dropped. Export it again, or check the Studio log.
@@ -184,6 +196,10 @@ console). The lines that mean something is wrong are at the top:
 
 ## When something is off
 
+- **Everything is white or flat, with no textures.** Check the viewport's shading first: Solid
+  view draws each material's flat viewport colour (white on most skin) and no texture. Press `Z`
+  and choose Material Preview, or render. The import's closing message says so when the view is
+  in Solid.
 - **The fix you just installed does not show.** Restart Blender (for the extension), or check the
   build stamp in `LogOutput.log` (for the plugin).
 - **An export fails at once.** Grey's MeshExporter is missing or failed to load. Check
